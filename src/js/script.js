@@ -56,6 +56,7 @@
       const thisProduct = this;
 
       thisProduct.id = id;
+      // console.log(id, data);
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
@@ -68,7 +69,7 @@
       const thisProduct = this;
 
       // generate HTML based on templates
-      const generateHTML = templates.menuProduct(thisProduct);
+      const generateHTML = templates.menuProduct(thisProduct.data);
       // console.log(generateHTML);
       // create element using utils.cleateElementFromHTML
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
@@ -82,7 +83,7 @@
       const thisProduct = this;
 
       /* find the clickable trigger (the element that should react to clicking) */
-      const clickableTrigger = thisProduct.selector.querySelector(select.menuProduct.clickable);
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       console.log(clickableTrigger);
       /* START: add event listener to clickable trigger on event click */
       clickableTrigger.addEventListener('click', function(event){
@@ -91,14 +92,13 @@
         /* find active product (product that has active class) */
         const activeProduct = document.querySelector(select.all.menuProductsActive);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        if (activeProduct != thisProduct.element){
-        activeProduct.classList.remove(classNames.menuProduct.imageVisible);
-          thisProduct.element.classList.add(classNames.menuProduct.imageVisible);
-          } else {
-
+        if (activeProduct != null && activeProduct != thisProduct.element){
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+          
+        } 
         /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle(classNames.menuProduct.imageVisible)
-          }
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        
       });
     }
   }
@@ -129,9 +129,10 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
-
-    app.init();
-  
+  app.init();
 }
