@@ -82,7 +82,7 @@
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-     // CODE ADDED START
+    // CODE ADDED START
     cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
     // CODE ADDED END
   };
@@ -241,7 +241,7 @@
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       thisProduct.amountWidgetElem.addEventListener('updated', function(){
         thisProduct.processOrder();
-      })
+      });
     }
   }
 
@@ -254,8 +254,8 @@
       
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
-      console.log('AmoutWidget:', thisWidget);
-      console.log('constructor arguments:', element);
+      // console.log('AmoutWidget:', thisWidget);
+      // console.log('constructor arguments:', element);
     }
     
     getElements(element){
@@ -288,9 +288,9 @@
       const thisWidget = this;
 
       thisWidget.input.addEventListener('change', function (event) {
-          event.preventDefault();
-          thisWidget.setValue(thisWidget.input.value);
-        });
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.input.value);
+      });
 
       thisWidget.linkDecrease.addEventListener('click', function(event){
         event.preventDefault();
@@ -308,6 +308,37 @@
       const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
     }
+  }
+  class Cart{
+    constructor(element){
+      const thisCart = this;
+
+      thisCart.product = [];
+
+      thisCart.getElements(element);
+      thisCart.initActions();
+      console.log('new Cart:', thisCart);
+    }
+  
+    getElements(element){
+      const thisCart = this;
+
+      thisCart.dom = {};
+
+      thisCart.dom.wrapper = element;
+
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      console.log('toggle:', thisCart.dom.toggleTrigger);
+    }
+    initActions(){
+      const thisCart = this;
+
+      thisCart.dom.toggleTrigger = addEventListener('click', function(event){
+        event.preventDefault();
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+    }
+      
   }
   
   const app = {
@@ -327,6 +358,12 @@
       // const testProduct = new Product();
       // console.log('testProduct:', testProduct);
     },
+    initCart: function(){
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    },
 
   
     init: function(){
@@ -339,6 +376,7 @@
 
       thisApp.initData();
       thisApp.initMenu();
+      thisApp.initCart();
     },
   };
   app.init();
