@@ -258,7 +258,8 @@
       productSummary.name = thisProduct.data.name;
       productSummary.amount = thisProduct.amountWidget.value;
       productSummary.priceSingle = thisProduct.priceSingle;
-      productSummary.price = productSummary.priceSingle * productSummary.amount;
+      // productSummary.price = productSummary.priceSingle * productSummary.amount;
+      productSummary.price = thisProduct.data.price; 
      
       productSummary.params = {};
 
@@ -395,6 +396,9 @@
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
       });
+      thisCart.dom.productList.addEventListener('remove', function (event){
+        thisCart.remove(event.detail.cartProduct);
+      })
     }
     add(menuProduct){
       const thisCart = this;
@@ -437,6 +441,17 @@
         totalPrice.innerHTML = thisCart.totalPrice;
       }
     }
+    remove(removeProduct){
+      const thisCart = this;
+
+      const indexOfRemoveProduct = thisCart.products.indexOf(removeProduct);
+
+      removeProduct.dom.wrapper.remove();
+
+      thisCart.products.splice(indexOfRemoveProduct, 1);
+
+      thisCart.update();
+    }
   }
   
   class CartProduct{
@@ -452,7 +467,7 @@
       
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
-      
+      thisCartProduct.initActions();
       // console.log(thisCartProduct);
     }
     getElements(element){
@@ -475,7 +490,32 @@
         thisCartProduct.priceSingle = thisCartProduct.amount * thisCartProduct.price;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.priceSingle;
       });
-    } 
+    }
+    remove(){
+      const thisCartProduct = this;
+      // console.log(thisCartProduct.remove);
+      const event = new CustomEvent('remove', {
+        bubbles: true,
+        detail: {
+          cartProduct: thisCartProduct,
+        },
+      });
+
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+    }
+    initActions(){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom.edit.addEventListener('click', function(event){
+        event.preventDefault();
+      });
+
+      thisCartProduct.dom.remove.addEventListener('click', function(event){
+        event.preventDefault();
+        thisCartProduct.remove();
+        
+      });
+    }
   }
   const app = {
     initData: function(){
