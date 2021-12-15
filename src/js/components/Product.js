@@ -168,7 +168,7 @@ class Product{
     // app.cart.add(thisProduct.prepareCartProduct());
 
     const event = new CustomEvent('add-to-cart', {
-      bubles: true,
+      bubbles: true,
       detail: {
         product: thisProduct.prepareCartProduct(),
       }
@@ -187,7 +187,7 @@ class Product{
     productSummary.price = productSummary.priceSingle * productSummary.amount;
     // productSummary.price = thisProduct.data.price; 
    
-    productSummary.params = {};
+    // productSummary.params = {};
 
     productSummary.params = thisProduct.prepareCartProductParams();
 
@@ -197,6 +197,7 @@ class Product{
     const thisProduct = this;
 
     const formData = utils.serializeFormToObject(thisProduct.form);
+    
     const params = {};
     // for every category (param)...
     for(let paramId in thisProduct.data.params) {
