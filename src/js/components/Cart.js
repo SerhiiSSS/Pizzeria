@@ -1,4 +1,4 @@
-import {select, classNames, url, templates} from '../settings.js';
+import {select, classNames, templates, settings} from '../settings.js';
 import {utils} from '../utils.js';
 import CartProduct from './CartProduct.js';
 
@@ -45,8 +45,8 @@ class Cart{
     });
     thisCart.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
-      // thisCart.sendOrder(url, options);
-      thisCart.sendOrder(url);
+      thisCart.sendOrder();
+      // thisCart.sendOrder(url);
     });
   }
   add(menuProduct){
