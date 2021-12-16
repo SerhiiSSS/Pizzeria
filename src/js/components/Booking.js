@@ -6,7 +6,7 @@ class Booking {
   constructor(element){
     const thisBooking = this;
 
-    thisBooking.render(element)
+    thisBooking.render(element);
     thisBooking.initWidgets();
   }
 
@@ -17,7 +17,6 @@ class Booking {
 
     thisBooking.dom = {};
     thisBooking.dom.wrapper = element;
-    console.log(element);
     thisBooking.dom.wrapper.innerHTML = generateHTML;
 
     thisBooking.dom.peopleAmount = document.querySelector(select.widgets.booking.peopleAmount);
@@ -31,4 +30,4 @@ class Booking {
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
   }
 }
-export default Booking
+export default Booking;
