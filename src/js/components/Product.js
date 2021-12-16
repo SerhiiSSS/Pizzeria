@@ -197,7 +197,7 @@ class Product{
     const thisProduct = this;
 
     const formData = utils.serializeFormToObject(thisProduct.form);
-    
+
     const params = {};
     // for every category (param)...
     for(let paramId in thisProduct.data.params) {
