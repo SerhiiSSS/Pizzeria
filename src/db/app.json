@@ -257,14 +257,15 @@
    }
  ],
  "bookings": [
-    {
-      "id": 2,
-      "date": "2021-01-01",
-      "hour": "16:00",
-      "table": 3,
-      "duration": 2,
+   {
+      "id": 1,
+      "date": "2021-08-01",
+      "hour": "12:30",
+      "table": 1,
+      "repeat": false,
+      "duration": 4,
       "ppl": 3,
-      "starters": ["bread", "lemonWater"]
-    }
+      "starters": []
+   }
  ]
 }

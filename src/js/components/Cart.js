@@ -53,7 +53,7 @@ class Cart{
 
     // generate HTML based on templates
     const generateHTML = templates.cartProduct(menuProduct);
-    // create element using utils.cleateElementFromHTML
+    // create element using utils.createElementFromHTML
     const generateDOM = utils.createDOMFromHTML(generateHTML);
 
     thisCart.dom.productList.appendChild(generateDOM);
@@ -121,7 +121,7 @@ class Cart{
       payload.products.push(prod.getData());
     }
     const options = {
-      metod: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
