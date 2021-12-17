@@ -46,7 +46,6 @@ class Cart{
     thisCart.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisCart.sendOrder();
-      // thisCart.sendOrder(url);
     });
   }
   add(menuProduct){
@@ -108,16 +107,16 @@ class Cart{
     // console.log(url);
 
     const payload = {};
-    
+    // console.log(payload);
     payload.address = thisCart.dom.address.value;
     payload.phone = thisCart.dom.phone.value;
-    payload.totalPrice = thisCart.dom.totalPrice;
-    payload.subtotalPrice = thisCart.dom.subtotalPrice;
-    payload.totalNumber = thisCart.dom.totalNumber;
-    payload.deliveryFee = thisCart.dom.deliveryFee;
+    payload.totalPrice = thisCart.totalPrice;
+    payload.subtotalPrice = thisCart.subtotalPrice;
+    payload.totalNumber = thisCart.totalNumber;
+    payload.deliveryFee = thisCart.deliveryFee;
 
     payload.products = [];
-
+    // console.log(payload.products);
     for(let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
@@ -126,9 +125,10 @@ class Cart{
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload), 
+      body: JSON.stringify(payload),
     };
     fetch(url, options);
+    // console.log(url, options);
   }
 }
 
