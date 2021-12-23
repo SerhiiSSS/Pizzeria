@@ -39,8 +39,6 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
-
-    
     nav: {
       links: '.main-nav a',
     },
@@ -49,7 +47,15 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    floorPlan: '.floor-plan',
+    form: '.booking-form',
+    submit: '.booking-form [type="submit"]',
+    phone: '.booking-form [name="phone"]',
+    address: '.booking-form [name="address"]',
+    starters: '.booking-form [name="starter"]',
+    
   },
+  
 
   // CODE ADDED START
   cart: {
